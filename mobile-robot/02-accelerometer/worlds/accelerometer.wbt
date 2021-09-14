@@ -19,7 +19,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.018008295695757834 0.9964734544044664 0.0819533767050745 2.3266085189652164
-  position 0.769790695443745 0.352119324948836 -0.7354446750288706
+  position 1.155701629406902 0.4326386492579162 -1.0956677386773215
 }
 TexturedBackground {
 }
@@ -319,5 +319,5 @@ Robot {
     density -1
     mass 0.5
   }
-  controller "acc_gyro"
+  controller "acc"
 }
