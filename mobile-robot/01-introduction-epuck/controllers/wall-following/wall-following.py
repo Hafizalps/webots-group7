@@ -25,16 +25,16 @@ while robot.step(timestep) != -1:
     value_ps6 = sensor_ps6.getValue()
     
     #robot belok ke kiri karena di kanan ada objek
-    if value_ps0 > 78 and value_ps1 > 78:
+    if value_ps0 > 120 and value_ps1 > 120:
         rightmotor.setVelocity(4)
         leftmotor.setVelocity(-4)
     
     #robot belok ke kanan karena di kiri ada objek
-    if value_ps7 > 78 and value_ps6 > 78:
+    if value_ps7 > 120 and value_ps6 > 120:
         rightmotor.setVelocity(-4)
         leftmotor.setVelocity(4)
     
     #robot lurus karena tidak ada halangan
     else:
-        rightmotor.setVelocity(6)
-        leftmotor.setVelocity(6)
+        rightmotor.setVelocity(3)
+        leftmotor.setVelocity(3)

@@ -9,18 +9,19 @@ def run_robot(robot):
     timestep = 64
     max_speed = 6.28
     
+    #motor declaration
     left_motor = robot.getDevice('left wheel motor')
     right_motor = robot.getDevice('right wheel motor')
-    
     left_motor.setPosition(float('inf'))
-    left_motor.setVelocity(0.0)
-   
     right_motor.setPosition(float('inf'))
+    left_motor.setVelocity(0.0)
     right_motor.setVelocity(0.0)
     
+    #acc declaration
     acc = robot.getDevice('accelerometer')
     acc.enable(timestep)
     
+    #gyro declaration
     gyro = robot.getDevice('gyro')
     gyro.enable(timestep)    
     

@@ -11,7 +11,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 E-puck {
-  controller "acc_gyro"
+  controller "wall-following"
 }
 CircleArena {
   radius 0.5
