@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 1 0 0 4.71238898038469
-  position 4.518364673689508e-12 4.472468340744068 5.170028163485009e-14
+  position 1.1129354470765659e-16 4.8878903417041 -3.8389471419257256e-16
 }
 TexturedBackground {
 }
@@ -15,5 +15,5 @@ WorldMaze {
 E-puck {
   translation -0.14 0 0.45
   rotation 0 1 0 -5.307179586466759e-06
-  controller "manual_wall_following"
+  controller "pid_wall_following"
 }
