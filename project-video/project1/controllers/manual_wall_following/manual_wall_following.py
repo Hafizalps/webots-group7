@@ -31,17 +31,21 @@ def run_robot(robot):
 
         max_speed = calculate_motor(fast_speed)
         
+        #cek depan
         if sensor0_val > 80:
             left = -max_speed
             right = max_speed
         else:
+            #cek dinding kanan
             if sensor2_val > 80:
                 left = max_speed
                 right = max_speed
             else:                
+                #koreksi jalan
                 left = max_speed
                 right = max_speed/8
 
+            #patahan
             if sensor1_val > 80:
                 left = max_speed/8
                 right = max_speed

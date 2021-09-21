@@ -24,7 +24,7 @@ def run_robot(robot):
     
     #parameter
     #pid_parameter = [0.55, 0.00004, 2.6]
-    pid_parameter = [0.35, 0.00001, 2.2]
+    pid_parameter = [0.35, 0.00001, 2.2] #Kp Ki Kd
     error = [0, 0, 0]
     set_point = 140
     control = [0, 0, 0]
@@ -38,9 +38,11 @@ def run_robot(robot):
         for i in range(8):
             sensor_val[i] = sensor[i].getValue()
         
+        #kendali proporsional
         error[0] = set_point - sensor_val[2]
         control[0] = error[0]*pid_parameter[0]
         
+        #kendali integral
         error[1] = error[1] + error[0]
         if error[1] > 150:
             error[1] = 150
@@ -48,6 +50,7 @@ def run_robot(robot):
             error[1] = -150
         control[1] = error[1]*pid_parameter[1]
         
+        #kendali differensial
         control[2] = (error[0]-error[2])*pid_parameter[2]   
         error[2] = error[0]
         
@@ -59,11 +62,13 @@ def run_robot(robot):
             pid_control = -(fast_speed-normal_speed-1)
     
         max_speed = calculate_motor(fast_speed)
+        #cek dinding depan
         if sensor_val[0] > 80:
             #print("Front")
             left = -max_speed
             right = max_speed
         else:
+            #cek error kecil, booster
             if error[0] >= -5 and error[0] <= 5:
                 left = max_speed
                 right = max_speed
