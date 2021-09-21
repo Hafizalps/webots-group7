@@ -1,0 +1,19 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 1 0 0 4.71238898038469
+  position 0.0003051560253083082 3.6984572816173595 3.5012756898850186e-06
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+WorldMaze {
+}
+E-puck {
+  translation -0.14 0 0.45
+  rotation 0 1 0 -5.307179586466759e-06
+  controller "pid_wall_following"
+}
