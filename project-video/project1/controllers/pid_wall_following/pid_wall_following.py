@@ -8,54 +8,37 @@ def run_robot(robot):
     timestep = 64
     
     #define sensor
-    sensor0 = robot.getDevice('ps0')
-    sensor0.enable(timestep)
-    sensor1 = robot.getDevice('ps1')
-    sensor1.enable(timestep)
-    sensor2 = robot.getDevice('ps2')
-    sensor2.enable(timestep)
-    sensor3 = robot.getDevice('ps3')
-    sensor3.enable(timestep)
-    sensor4 = robot.getDevice('ps4')
-    sensor4.enable(timestep)
-    sensor5 = robot.getDevice('ps5')
-    sensor5.enable(timestep)
-    sensor6 = robot.getDevice('ps6')
-    sensor6.enable(timestep)
-    sensor7 = robot.getDevice('ps7')
-    sensor7.enable(timestep)
+    sensor = []
+    sensor_name =['ps0', 'ps1', 'ps2', 'ps3', 'ps4', 'ps5', 'ps6', 'ps7']
+    for i in range(8):
+        sensor.append(robot.getDevice(sensor_name[i]))
+        sensor[i].enable(timestep)
     
     #define motor
-    left_motor = robot.getDevice('left wheel motor')
-    right_motor = robot.getDevice('right wheel motor')
-    left_motor.setPosition(float('inf'))
-    right_motor.setPosition(float('inf'))
-    left_motor.setVelocity(0)
-    right_motor.setVelocity(0)
+    wheel = []
+    wheel_name =['left wheel motor', 'right wheel motor']
+    for i in range(2):
+        wheel.append(robot.getDevice(wheel_name[i]))
+        wheel[i].setPosition(float('inf'))
+        wheel[i].setVelocity(0.0)
     
     #parameter
-    #pid_parameter = [0.5, 0.25, 2]
-    pid_parameter = [0.6, 0.00005, 2.5]
+    #pid_parameter = [0.55, 0.00004, 2.6]
+    pid_parameter = [0.35, 0.00001, 2.2]
     error = [0, 0, 0]
     set_point = 140
     control = [0, 0, 0]
     pid_control = 0
+    sensor_val = [0, 0, 0, 0, 0, 0, 0, 0]
     
     while robot.step(timestep) != -1:
-        normal_speed = 55
+        normal_speed = 80
         fast_speed = 100
         
-        sensor0_val = sensor0.getValue()
-        sensor1_val = sensor1.getValue()
-        sensor2_val = sensor2.getValue()
-        sensor3_val = sensor3.getValue()
-        sensor4_val = sensor4.getValue()
-        sensor5_val = sensor5.getValue()
-        sensor6_val = sensor6.getValue()
-        sensor7_val = sensor7.getValue()
+        for i in range(8):
+            sensor_val[i] = sensor[i].getValue()
         
-        error[0] = max(sensor2_val, sensor1_val);
-        error[0] = set_point - error[0]
+        error[0] = set_point - sensor_val[2]
         control[0] = error[0]*pid_parameter[0]
         
         error[1] = error[1] + error[0]
@@ -75,31 +58,29 @@ def run_robot(robot):
         if pid_control <= -(fast_speed-normal_speed-1):
             pid_control = -(fast_speed-normal_speed-1)
     
-        if (sensor0_val >= 79 or sensor7_val >= 79):
-            max_speed = calculate_motor(fast_speed)
+        max_speed = calculate_motor(fast_speed)
+        if sensor_val[0] > 80:
+            #print("Front")
             left = -max_speed
             right = max_speed
-            
-            #left_motor.setVelocity(-max_speed)
-            #right_motor.setVelocity(max_speed)
-
         else:
-            if error[0] >= -3 and error[0] <= 3:
-                max_speed = calculate_motor(fast_speed)
+            if error[0] >= -5 and error[0] <= 5:
                 left = max_speed
                 right = max_speed
-                
-                #left_motor.setVelocity(max_speed)
-                #right_motor.setVelocity(max_speed)  
             else:
-                speed = calculate_motor(normal_speed)
-                pid_control = calculate_motor(pid_control)
+                if sensor_val[2] > 80:
+                    #print("Wall")
+                    speed = calculate_motor(normal_speed)
+                    pid_control = calculate_motor(pid_control)
+                    left = speed+pid_control
+                    right = speed-pid_control
+                else:
+                    #print("No Wall")
+                    left = max_speed
+                    right = max_speed/6
                 
-                left = speed+pid_control
-                right = speed-pid_control
-                
-        left_motor.setVelocity(left)
-        right_motor.setVelocity(right)
+        wheel[0].setVelocity(left)
+        wheel[1].setVelocity(right)
         
         #round_error = [f"{num:.2f}" for num in error]
         #round_control = [f"{num:.2f}" for num in control]
