@@ -77,19 +77,29 @@ def run_robot(robot):
     
         if (sensor0_val >= 79 or sensor7_val >= 79):
             max_speed = calculate_motor(fast_speed)
-            left_motor.setVelocity(-max_speed)
-            right_motor.setVelocity(max_speed)
+            left = -max_speed
+            right = max_speed
+            
+            #left_motor.setVelocity(-max_speed)
+            #right_motor.setVelocity(max_speed)
+
         else:
             if error[0] >= -3 and error[0] <= 3:
                 max_speed = calculate_motor(fast_speed)
-                left_motor.setVelocity(max_speed)
-                right_motor.setVelocity(max_speed)  
+                left = max_speed
+                right = max_speed
+                
+                #left_motor.setVelocity(max_speed)
+                #right_motor.setVelocity(max_speed)  
             else:
                 speed = calculate_motor(normal_speed)
                 pid_control = calculate_motor(pid_control)
                 
-                left_motor.setVelocity(speed+pid_control)
-                right_motor.setVelocity(speed-pid_control)
+                left = speed+pid_control
+                right = speed-pid_control
+                
+        left_motor.setVelocity(left)
+        right_motor.setVelocity(right)
         
         #round_error = [f"{num:.2f}" for num in error]
         #round_control = [f"{num:.2f}" for num in control]
