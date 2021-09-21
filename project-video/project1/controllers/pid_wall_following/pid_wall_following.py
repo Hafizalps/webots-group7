@@ -35,14 +35,14 @@ def run_robot(robot):
     
     #parameter
     #pid_parameter = [0.5, 0.25, 2]
-    pid_parameter = [0.6, 0.0003, 2.2]
+    pid_parameter = [0.6, 0.00005, 2.5]
     error = [0, 0, 0]
     set_point = 140
     control = [0, 0, 0]
     pid_control = 0
     
     while robot.step(timestep) != -1:
-        normal_speed = 50
+        normal_speed = 55
         fast_speed = 100
         
         sensor0_val = sensor0.getValue()
@@ -59,10 +59,10 @@ def run_robot(robot):
         control[0] = error[0]*pid_parameter[0]
         
         error[1] = error[1] + error[0]
-        if error[1] > 120:
-            error[1] = 120
-        if error[1] <= -120:
-            error[1] = -120
+        if error[1] > 150:
+            error[1] = 150
+        if error[1] <= -150:
+            error[1] = -150
         control[1] = error[1]*pid_parameter[1]
         
         control[2] = (error[0]-error[2])*pid_parameter[2]   
@@ -70,10 +70,10 @@ def run_robot(robot):
         
         pid_control = control[0]+control[1]+control[2]     
         
-        if pid_control >= (fast_speed-normal_speed):
-            pid_control = (fast_speed-normal_speed)
-        if pid_control <= -(fast_speed-normal_speed):
-            pid_control = -(fast_speed-normal_speed)
+        if pid_control >= (fast_speed-normal_speed-1):
+            pid_control = (fast_speed-normal_speed-1)
+        if pid_control <= -(fast_speed-normal_speed-1):
+            pid_control = -(fast_speed-normal_speed-1)
     
         if (sensor0_val >= 79 or sensor7_val >= 79):
             max_speed = calculate_motor(fast_speed)
