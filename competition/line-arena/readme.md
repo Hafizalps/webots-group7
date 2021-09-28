@@ -1,6 +1,21 @@
 # Arena
 ![alt text](https://github.com/2black0/webots-laboratory/blob/main/competition/line-arena/complete_robot.png)
 
+# List Component of Robot
+## Sensor
+1. Inertial Unit 
+```
+"inertial unit"
+```
+2. Infra-red Sensor face to down
+```
+"IRL2"
+"IRL1"
+"IRCL"
+"IRCR"
+"IRR1"
+"IRR2"
+```
 # Rule
 1. robot start dari tempat start
 2. pada arena yagn tidak terdapat jalur harus mengikuti dinding 
