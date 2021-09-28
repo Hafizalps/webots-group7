@@ -37,11 +37,13 @@
 ```
 
 ## Actuator
+![Wheel](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/wheel-motor.png)
 1. Wheel
 ```
 "motor_1"
 "motor_2"
 ```
+![Arm](https://github.com/2black0/webots-laboratory/blob/9bf2197f52fc51027ad82c0f9bfa49ccd7cbddb7/competition/line-arena/img/arm.png)
 2. Arm
 ```
 "r_motor"
@@ -51,8 +53,8 @@
 "arm2_motor"
 ```
 # Rule
-1. robot start dari tempat start
-2. pada arena yagn tidak terdapat jalur harus mengikuti dinding 
-3. terdapat kubus berwarna merah-hijau-biru pada arena yang tidak boleh ditabrak
-4. tidak boleh terbalik
-5. robot boleh finish pada finish 1 atau 2
+1. Robot start from starting point
+2. Robot have to following the line
+3. Robot have to following the wall when no line
+4. Robot pick the box with the arm and bring the box
+5. Robot finish and stop in finishing point
