@@ -1,5 +1,5 @@
 # Arena
-![alt text](competition/line-arena/img/full-arena.png)
+![alt text](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/full-arena.png)
 
 # List Component of Robot
 ## Sensor
