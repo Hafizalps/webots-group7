@@ -1,5 +1,5 @@
 # Arena
-![alt text](https://github.com/2black0/webots-laboratory/blob/main/competition/line-arena/complete_robot.png)
+![alt text](competition/line-arena/img/full-arena.png)
 
 # List Component of Robot
 ## Sensor
@@ -7,7 +7,7 @@
 ```
 "inertial unit"
 ```
-2. Infra-red Sensor face to down
+2. Line Sensor
 ```
 "IRL2"
 "IRL1"
@@ -15,6 +15,37 @@
 "IRCR"
 "IRR1"
 "IRR2"
+```
+3. Distance Sensor
+```
+"ds_right"
+"ds_left"
+"ds_front"
+"ds_right_maze"
+```
+4. Wheel position
+```
+"ps_1"
+"ps_2"
+```
+5. Camera
+```
+"CAM"
+```
+
+## Actuator
+1. Wheel
+```
+"motor_1"
+"motor_2"
+```
+2. Arm
+```
+"r_motor"
+"l_motor"
+"base_motor"
+"arm1_motor"
+"arm2_motor"
 ```
 # Rule
 1. robot start dari tempat start
