@@ -1,12 +1,14 @@
 # Arena
-![alt text](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/full-arena.png)
+![Arena](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/full-arena.png)
 
 # List Component of Robot
 ## Sensor
+![Inertial Unit ](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/inertial-unit.png)
 1. Inertial Unit 
 ```
 "inertial unit"
 ```
+![Distance Sensor](https://github.com/2black0/webots-laboratory/blob/main/competition/line-arena/img/sensor.png)
 2. Line Sensor
 ```
 "IRL2"
@@ -28,6 +30,7 @@
 "ps_1"
 "ps_2"
 ```
+![Camera](https://github.com/2black0/webots-laboratory/blob/6821642d7449c7fbabcc026cab05f311bd9c2706/competition/line-arena/img/camera.png)
 5. Camera
 ```
 "CAM"
