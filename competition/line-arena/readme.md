@@ -8,7 +8,7 @@
 ```
 "inertial unit"
 ```
-![Distance Sensor](https://github.com/2black0/webots-laboratory/blob/main/competition/line-arena/img/sensor.png)
+![Distance Sensor](https://github.com/2black0/webots-laboratory/blob/e5155ba50e504a4b3106b1218210571894c044d8/competition/line-arena/img/sensor.png)
 2. Line Sensor
 ```
 "IRL2"
