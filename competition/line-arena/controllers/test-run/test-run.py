@@ -166,7 +166,7 @@ def run_robot(robot):
         #print("IR sensor values: {:.3f} {:.3f} {:.3f} {:.3f} {:.3f} {:.3f}".format(sensor_ir_val[0], sensor_ir_val[1], sensor_ir_val[2], sensor_ir_val[3], sensor_ir_val[4], sensor_ir_val[5]))
         
         print(kiri)
-        # print(kanan)
+        print(kanan)
 
         #print(*sensor_ir_val)
 
