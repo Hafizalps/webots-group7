@@ -9,7 +9,6 @@ kecepatan_normal = 65 #65
 kecepatan_cepat = 100
 pid_control_line = 0
 
-
 def run_robot(robot):
     global kecepatan_lambat, kecepatan_normal, kecepatan_cepat
     timestep = 8
