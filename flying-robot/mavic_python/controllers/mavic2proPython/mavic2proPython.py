@@ -25,14 +25,25 @@ mavic2proHelper.motorsSpeed(robot, TAKEOFF_THRESHOLD_VELOCITY, TAKEOFF_THRESHOLD
 
 front_left_led = LED("front left led")
 front_right_led = LED("front right led")
+
+# Deklarasi GPS
 gps = GPS("gps")
 gps.enable(TIME_STEP)
+
 imu = InertialUnit("inertial unit")
 imu.enable(TIME_STEP)
+
+# Deklarasi Compass Sensor
 compass = Compass("compass")
 compass.enable(TIME_STEP)
+
+# Deklarasi Gyro Sensor
 gyro = Gyro("gyro")
 gyro.enable(TIME_STEP)
+
+# Deklarasi Camera
+camera = robot.getDevice('camera')
+camera.enable(timestep)
 
 yaw_setpoint=-1
 
@@ -41,7 +52,7 @@ rollPID = PID(float(params["roll_Kp"]), float(params["roll_Ki"]), float(params["
 throttlePID = PID(float(params["throttle_Kp"]), float(params["throttle_Ki"]), float(params["throttle_Kd"]), setpoint=1)
 yawPID = PID(float(params["yaw_Kp"]), float(params["yaw_Ki"]), float(params["yaw_Kd"]), setpoint=float(yaw_setpoint))
 
-targetX, targetY, target_altitude = 0.0, 0.0, 1.0
+targetX, targetY, target_altitude = 0.5, 0.0, 1.0
 
 while (robot.step(timestep) != -1):
 
@@ -54,6 +65,7 @@ while (robot.step(timestep) != -1):
 	yaw = compass.getValues()[0]
 	roll_acceleration = gyro.getValues()[0]
 	pitch_acceleration = gyro.getValues()[1]
+
 	
 	xGPS = gps.getValues()[2]
 	yGPS = gps.getValues()[0]
@@ -74,3 +86,5 @@ while (robot.step(timestep) != -1):
 	rear_right_motor_input = float(params["k_vertical_thrust"]) + vertical_input + roll_input + pitch_input + yaw_input
 
 	mavic2proHelper.motorsSpeed(robot, front_left_motor_input, -front_right_motor_input, -rear_left_motor_input, rear_right_motor_input)
+
+	print("Posisi Drone pada Titik (X,Y,Z): {:.3f} | {:.3f} | {:.3f}".format(xGPS, yGPS, zGPS))

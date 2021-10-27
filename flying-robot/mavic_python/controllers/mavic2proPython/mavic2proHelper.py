@@ -1,8 +1,8 @@
 def getMotorAll(robot):
-	frontLeftMotor = robot.getMotor('front left propeller')
-	frontRightMotor = robot.getMotor('front right propeller')
-	backLeftMotor = robot.getMotor('rear left propeller')
-	backRightMotor = robot.getMotor('rear right propeller')
+	frontLeftMotor = robot.getDevice('front left propeller')
+	frontRightMotor = robot.getDevice('front right propeller')
+	backLeftMotor = robot.getDevice('rear left propeller')
+	backRightMotor = robot.getDevice('rear right propeller')
 	return [frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor]
 
 def motorsSpeed(robot, v1, v2, v3, v4):

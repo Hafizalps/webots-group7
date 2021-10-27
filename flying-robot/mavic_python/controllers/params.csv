@@ -3,7 +3,7 @@ TAKEOFF_THRESHOLD_VELOCITY,160,floor_width,70
 k_vertical_thrust,68.5,floor_height,42.4
 k_roll_p,10,waypoint_reached_tolerance,0.1
 k_pitch_p,10,,
-target_altitude,1,,
+target_altitude,1.0,,
 pitch_Kp,2,,
 pitch_Ki,0.1,,
 pitch_Kd,2,,
