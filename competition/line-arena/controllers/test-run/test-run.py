@@ -28,6 +28,10 @@ midPrevWall = 0
 rightPrevWall = 0
 distanceToWall = 990
 
+# Parameter untuk deteksi warna
+warna = ['Abu-abu', 'Merah', 'Hijau', 'Biru']
+color = 0
+
 # Deklarasi Motor
 motor = []
 motor_nama =['motor_1', 'motor_2']
@@ -153,6 +157,26 @@ def kalkulasi_pid_line():
     pid_control_line = control[0] + control[1] + control[2]
     pid_control_line = kalkulasi_motor(pid_control_line)
 
+def getColorAt (x, y) :
+    global color
+    cameraData = camera.getImage()
+    cameraWidth = camera.getWidth()
+
+    r = camera.imageGetRed(cameraData, cameraWidth, x, y)
+    g = camera.imageGetGreen(cameraData, cameraWidth, x, y)
+    b = camera.imageGetBlue(cameraData, cameraWidth, x, y)
+
+    #warna = ['Abu-abu', 'Merah', 'Hijau', 'Biru']
+    if r > g and r > b :
+        color = 1
+    if g > r and g > b :
+        color = 2
+    if b > g and b > r :
+        color = 3
+    
+    print("Deteksi Warna: {}".format(warna[color]))
+    return color
+
 # Main Loop
 while robot.step(timestep) != -1:
     for i in range(2):
@@ -178,9 +202,9 @@ while robot.step(timestep) != -1:
         kanan = kecepatan - pid_control_line
         if (sensor_jarak_val[0] > 700 and sensor_jarak_val[0] < 990) or (sensor_jarak_val[2] > 700 and sensor_jarak_val[2] < 990) :
             stage = 2
+            print("Algoritma Wall Following")
 
     elif stage == 2 :
-        print("Algoritma Wall Following")
         left_wall_error = sensor_jarak_val[0] - 780
         right_wall_error = sensor_jarak_val[2] - 780
         # Deteksi tembok kanan
@@ -205,6 +229,7 @@ while robot.step(timestep) != -1:
             kanan = kecepatan_normal - pd_control_wall
         elif sensor_ir_val == [0, 0, 0, 0, 0, 0] and sensor_jarak_val[0] == 1000:
             stage = 3
+        print("Jarak Tembok Kiri: {:.3f} | Jarak Tembok Kanan: {:.3f}".format(sensor_jarak_val[0], sensor_jarak_val[2]))
 
     elif stage == 3 :
         # Line follow
@@ -222,16 +247,16 @@ while robot.step(timestep) != -1:
             print("Belok Kanan Tajam")            
         if sensor_jarak_val[2] < 550 :
             stage = 4
+            print("Algoritma Gate Arena")
             
     elif stage == 4 :
         if sensor_ir_val == [1, 1, 1, 1, 1, 1] :
-            print("Algoritma Gate Arena")
             if sensor_jarak_val[1] < 190 :
                 kiri = 0
                 kanan = 0
             elif sensor_jarak_val[1] > 190 :
-                kiri = kecepatan_cepat
-                kanan = kecepatan_cepat
+                kiri = 85
+                kanan = 85
         else :
             # Line follow
             kalkulasi_pid_line()
@@ -245,8 +270,13 @@ while robot.step(timestep) != -1:
             print("Finish")
 
         #print("{} {}".format(kiri, kanan))
-        #print(gateCount)
         kecepatan_lambat = 0
+    
+    # Deteksi Warna
+    """colorDiff = abs(getColorAt(32, 10) - getColorAt (32, 50))
+    if colorDiff == 0 :
+        colorDiff = 2
+    print("Color Difference = {}".format(colorDiff))"""
       
     # Pembatas Kecepatan         
     if kiri > kecepatan_cepat :
