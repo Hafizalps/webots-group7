@@ -1,4 +1,4 @@
-#VRML_SIM R2020a utf8
+#VRML_SIM R2021a utf8
 WorldInfo {
   info [
     "This demonstration shows a DJI Mavic 2 PRO flying over a rural area."
@@ -10,6 +10,7 @@ WorldInfo {
     linear 0.5
     angular 0.5
   }
+  coordinateSystem "NUE"
 }
 Viewpoint {
   orientation 0.559528867449423 -0.7899489939995233 -0.2508147391400816 5.247864771623758
@@ -133,7 +134,7 @@ Mavic2Pro {
   hidden position_6_0 -3.124125451904938e-09
   hidden rotation_7 0 1 0 2.5969094594891054e-06
   hidden position_7_0 -1.196513474328974e-09
-  hidden rotation_8 -1 0 0 9.499417215889321e-07
+  hidden rotation_8 -0.9999999999999999 0 0 9.499417215889321e-07
   translation 0 0.1 0
   rotation 0.009137368927045055 -0.7070605726262135 -0.7070939507071051 -3.123090317151868
   name "Mavic 2 PRO(1)"

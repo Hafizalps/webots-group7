@@ -4,6 +4,7 @@ from simple_pid import PID
 import csv
 import struct
 
+# Membuka dan membaca file csv yang berisikan parameter-parameter
 params = dict()
 with open("../params.csv", "r") as f:
 	lines = csv.reader(f)
@@ -45,14 +46,22 @@ gyro.enable(TIME_STEP)
 camera = robot.getDevice('camera')
 camera.enable(timestep)
 
-yaw_setpoint=-1
+yaw_setpoint=-1.0
 
-pitchPID = PID(float(params["pitch_Kp"]), float(params["pitch_Ki"]), float(params["pitch_Kd"]), setpoint=0.0)
-rollPID = PID(float(params["roll_Kp"]), float(params["roll_Ki"]), float(params["roll_Kd"]), setpoint=0.0)
-throttlePID = PID(float(params["throttle_Kp"]), float(params["throttle_Ki"]), float(params["throttle_Kd"]), setpoint=1)
+# Kalkulasi PID untuk mengunci dan mengatur target posisi pada sumbu Y 
+pitchPID = PID(float(params["pitch_Kp"]), float(params["pitch_Ki"]), float(params["pitch_Kd"]), setpoint=0.0) 
+
+# Kalkulasi PID untuk mengunci dan mengatur target posisi pada sumbu X
+rollPID = PID(float(params["roll_Kp"]), float(params["roll_Ki"]), float(params["roll_Kd"]), setpoint=0.0) 
+
+# Kalkulasi PID untuk mengunci dan mengatur target posisi pada sumbu Z atau ketinggian drone
+throttlePID = PID(float(params["throttle_Kp"]), float(params["throttle_Ki"]), float(params["throttle_Kd"]), setpoint=1.0)
+
+# Kalkulasi PID untuk mengunci dan mengatur target posisi drone akan menghadap kemana yang berdasarkan sensor compass
 yawPID = PID(float(params["yaw_Kp"]), float(params["yaw_Ki"]), float(params["yaw_Kd"]), setpoint=float(yaw_setpoint))
 
-targetX, targetY, target_altitude = 0.5, 0.0, 1.0
+# Setpoint posisi drone pada GPS
+targetX, targetY, target_altitude = 0.0, 0.0, 1.0
 
 while (robot.step(timestep) != -1):
 
@@ -66,7 +75,6 @@ while (robot.step(timestep) != -1):
 	roll_acceleration = gyro.getValues()[0]
 	pitch_acceleration = gyro.getValues()[1]
 
-	
 	xGPS = gps.getValues()[2]
 	yGPS = gps.getValues()[0]
 	zGPS = gps.getValues()[1]

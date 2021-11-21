@@ -1,0 +1,46 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  info [
+    "Line Foillowing Robot on Webots"
+  ]
+  title "Line Maze Solver "
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  fieldOfView 0.885398
+  orientation -0.988392591135059 -0.1516489547998594 0.009092870692723633 0.7428204784298013
+  position -0.5824670226172407 1.4501126697320226 1.7121775339554697
+  follow "e-puck"
+}
+TexturedBackground {
+  texture "dusk"
+  luminosity 7
+}
+TexturedBackgroundLight {
+  texture "noon_sunny_garden"
+}
+RectangleArena {
+  floorSize 2 1
+  floorTileSize 2 1
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "C:/Users/USER/Desktop/Semester 5/Praktik Robotika/webots-group7/mobile-robot/04-line maze solver/Track TA smt 5_2.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+DEF E_PUCK E-puck {
+  translation -0.846991 -0.00101155 0.325526
+  rotation 0.00039268594000272365 0.9999998472131006 0.00038906494055596504 -1.5700553071795866
+  controller "line_maze"
+  camera_width 40
+  camera_height 1
+  window "botstudio"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
